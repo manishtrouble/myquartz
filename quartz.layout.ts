@@ -36,7 +36,6 @@ export const defaultContentPageLayout: PageLayout = {
           grow: true,
         },
         { Component: Component.Darkmode() },
-        { Component: Component.ReaderMode() },
       ],
     }),
     Component.DesktopOnly(
@@ -62,9 +61,31 @@ export const defaultContentPageLayout: PageLayout = {
     ),
   ],
   right: [
-    Component.Graph(),
+    Component.DesktopOnly(Component.Graph()),
     Component.DesktopOnly(Component.TableOfContents()),
     Component.Backlinks(),
+    // Mobile-only: Recent Writing and Notes
+    Component.MobileOnly(
+      Component.RecentNotes({
+        title: "Recent Writing",
+        limit: 3,
+        showTags: false,
+        linkToMore: "tags/evergreen" as SimpleSlug,
+        filter: (f) => f.frontmatter?.tags?.includes("evergreen") ?? false,
+      }),
+    ),
+    Component.MobileOnly(
+      Component.RecentNotes({
+        title: "Recent Notes",
+        limit: 3,
+        showTags: false,
+        linkToMore: "tags/seedling" as SimpleSlug,
+        filter: (f) => {
+          const tags = f.frontmatter?.tags ?? []
+          return tags.includes("seedling") || tags.includes("budding")
+        },
+      }),
+    ),
   ],
 }
 
