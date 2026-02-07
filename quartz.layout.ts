@@ -66,7 +66,20 @@ export const defaultContentPageLayout: PageLayout = {
 
 // components for pages that display lists of pages  (e.g. tags or folders)
 export const defaultListPageLayout: PageLayout = {
-  beforeBody: [Component.Breadcrumbs(), Component.ArticleTitle(), Component.ContentMeta()],
+  beforeBody: [
+    Component.Breadcrumbs(),
+    Component.ArticleTitle(),
+    Component.ContentMeta(),
+    // Life in Weeks - only on /life/ folder page
+    Component.ConditionalRender({
+      component: Component.LifeInWeeks({
+        birthDate: "1995-01-01", // TODO: Update with your actual birthdate
+        lifeExpectancy: 80,
+        title: "Life in Weeks",
+      }),
+      condition: (page) => page.fileData.slug?.startsWith("life") ?? false,
+    }),
+  ],
   left: [
     Component.PageTitle(),
     Component.MobileOnly(Component.Spacer()),
