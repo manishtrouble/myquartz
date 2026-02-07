@@ -8,7 +8,7 @@ import * as Plugin from "./quartz/plugins"
  */
 const config: QuartzConfig = {
   configuration: {
-    pageTitle: "Quartz 4",
+    pageTitle: "nicheQuill",
     pageTitleSuffix: "",
     enableSPA: true,
     enablePopovers: true,
@@ -28,27 +28,29 @@ const config: QuartzConfig = {
         code: "IBM Plex Mono",
       },
       colors: {
+        // 💡 Neon Theme - Light Mode
         lightMode: {
-          light: "#faf8f8",
-          lightgray: "#e5e5e5",
-          gray: "#b8b8b8",
-          darkgray: "#4e4e4e",
-          dark: "#2b2b2b",
-          secondary: "#284b63",
-          tertiary: "#84a59d",
-          highlight: "rgba(143, 159, 169, 0.15)",
-          textHighlight: "#fff23688",
+          light: "#FFFFFF",           // White background
+          lightgray: "#E8E8E8",       // Light gray borders
+          gray: "#888888",            // Medium gray
+          darkgray: "#1A1A1A",        // Near-black body text
+          dark: "#000000",            // Pure black headlines
+          secondary: "#5800FF",       // Electric purple (links)
+          tertiary: "#E900FF",        // Neon magenta (hover)
+          highlight: "rgba(88, 0, 255, 0.12)",
+          textHighlight: "#FFC60066", // Neon yellow highlight
         },
+        // 🌃 Neon Theme - Dark Mode (Cyberpunk)
         darkMode: {
-          light: "#161618",
-          lightgray: "#393639",
-          gray: "#646464",
-          darkgray: "#d4d4d4",
-          dark: "#ebebec",
-          secondary: "#7b97aa",
-          tertiary: "#84a59d",
-          highlight: "rgba(143, 159, 169, 0.15)",
-          textHighlight: "#b3aa0288",
+          light: "#000000",           // Pure black background
+          lightgray: "#1A1A1A",       // Near-black borders
+          gray: "#444444",            // Dark gray
+          darkgray: "#E8E8E8",        // Light gray body text
+          dark: "#FFFFFF",            // Pure white headlines
+          secondary: "#FF5FCF",       // Pink (links)
+          tertiary: "#9929EA",        // Purple (hover)
+          highlight: "rgba(255, 95, 207, 0.2)",
+          textHighlight: "#FAEB9288", // Pale yellow highlight
         },
       },
     },
