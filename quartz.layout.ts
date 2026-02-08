@@ -98,7 +98,7 @@ export const defaultListPageLayout: PageLayout = {
     // Life in Weeks - only on /life/ folder page
     Component.ConditionalRender({
       component: Component.LifeInWeeks({
-        birthDate: "1995-01-01", // TODO: Update with your actual birthdate
+        birthDate: "1998-07-22", // TODO: Update with your actual birthdate
         lifeExpectancy: 80,
         title: "Life in Weeks",
       }),

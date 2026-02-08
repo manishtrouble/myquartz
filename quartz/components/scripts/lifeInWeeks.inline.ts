@@ -20,11 +20,13 @@ document.addEventListener("nav", () => {
             url: string
         }> = entriesStr ? JSON.parse(entriesStr) : []
 
-        let currentEntryIndex = 0
+        let currentEntryIndex = 0 // Start with first entry selected
 
         // Update the event display
         function updateEventDisplay() {
             if (entries.length === 0) return
+
+
 
             const entry = entries[currentEntryIndex]
             if (eventWeek) {

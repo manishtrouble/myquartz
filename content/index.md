@@ -17,7 +17,7 @@ Outside of work, you can find me [[rabbit-holes/index|Inside A New Rabbit Hole]]
 ---
 
 **Explore:**
-- [[blog/index|Blog]] — where I write about everything
+- [[blog/index|Blog]] — where I write
 - [[projects/index|Projects]] — where I experiment  
 - [[life/index|Life]] — where I document my life in weeks
 - [Resume](/assets/resume.pdf) — please check it out :)

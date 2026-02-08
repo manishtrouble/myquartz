@@ -93,35 +93,38 @@
 
   .life-grid {
     display: grid;
-    grid-template-columns: 40px repeat(52, 1fr);
-    gap: 1px;
+    grid-template-columns: 25px repeat(52, 10px);
+    grid-auto-rows: 10px;
+    gap: 2px;
     min-width: 600px;
+    justify-content: start;
   }
 
   .year-label {
-    font-size: 0.6rem;
+    font-size: 0.55rem;
     color: var(--gray);
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding-right: 4px;
+    padding-right: 2px;
     font-family: var(--codeFont);
+    height: 10px;
   }
 
   .week-cell {
-    aspect-ratio: 1;
-    min-width: 6px;
-    min-height: 6px;
+    width: 10px;
+    height: 10px;
     border-radius: 1px;
     border: 1px solid var(--lightgray);
     background-color: transparent;
     cursor: pointer;
     transition: all 0.15s ease;
+    box-sizing: border-box;
 
     &:hover {
-      transform: scale(1.5);
       z-index: 10;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      outline: 2px solid var(--tertiary);
+      outline-offset: 1px;
     }
 
     &.lived {
@@ -131,9 +134,11 @@
     }
 
     &.current {
-      background-color: var(--tertiary);
+      background-color: transparent;
       border-color: var(--tertiary);
-      animation: pulse 2s infinite;
+      outline: 2px solid var(--tertiary);
+      outline-offset: 1px;
+      animation: border-pulse 2s infinite;
     }
 
     &.future {
@@ -143,7 +148,9 @@
 
     &.has-entry {
       opacity: 1;
-      border-width: 2px;
+      // Use outline instead of thicker border to avoid size change
+      outline: 1px solid var(--dark);
+      outline-offset: -1px;
 
       &:hover {
         opacity: 1;
@@ -151,81 +158,84 @@
     }
 
     &.highlighted {
-      transform: scale(1.8);
-      z-index: 20;
-      box-shadow: 0 0 0 3px var(--tertiary), 0 4px 12px rgba(0, 0, 0, 0.3);
+      background-color: var(--tertiary);
+      outline: 2px solid var(--tertiary);
+      outline-offset: 1px;
+      box-shadow: 0 0 10px var(--tertiary);
     }
 
-    // Keep pulsing even when highlighted
+    // Current + highlighted: show both effects
     &.current.highlighted {
-      animation: pulse 2s infinite;
+      background-color: var(--tertiary);
+      outline: 2px solid var(--tertiary);
+      outline-offset: 1px;
+      box-shadow: 0 0 10px var(--tertiary);
+      animation: border-pulse 2s infinite;
     }
   }
+}
 
-  @keyframes pulse {
+@keyframes border-pulse {
 
-    0%,
-    100% {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    50% {
-      opacity: 0.7;
-      transform: scale(1.1);
-    }
+  0%,
+  100% {
+    box-shadow: 0 0 8px var(--tertiary), 0 0 16px var(--tertiary);
   }
 
-  .life-stats {
+  50% {
+    box-shadow: 0 0 4px var(--tertiary), 0 0 8px var(--tertiary);
+  }
+}
+
+.life-stats {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  color: var(--gray);
+  font-family: var(--codeFont);
+
+  .stat {
     display: flex;
-    gap: 1.5rem;
-    margin-top: 0.75rem;
-    font-size: 0.75rem;
-    color: var(--gray);
-    font-family: var(--codeFont);
+    align-items: center;
+    gap: 0.25rem;
 
-    .stat {
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
 
-      .dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 2px;
+      &.lived {
+        background-color: var(--secondary);
+      }
 
-        &.lived {
-          background-color: var(--secondary);
-        }
+      &.current {
+        background-color: var(--tertiary);
+      }
 
-        &.current {
-          background-color: var(--tertiary);
-        }
-
-        &.future {
-          border: 1px solid var(--lightgray);
-        }
+      &.future {
+        border: 1px solid var(--lightgray);
       }
     }
   }
+}
 
-  .tooltip {
-    position: fixed;
-    background-color: var(--dark);
-    color: var(--light);
-    padding: 0.5rem 0.75rem;
-    border-radius: 4px;
-    font-size: 0.75rem;
-    font-family: var(--codeFont);
-    pointer-events: none;
-    z-index: 1000;
-    white-space: pre-line;
-    opacity: 0;
-    transition: opacity 0.15s ease;
-    max-width: 250px;
+.tooltip {
+  position: fixed;
+  background-color: var(--dark);
+  color: var(--light);
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-family: var(--codeFont);
+  pointer-events: none;
+  z-index: 1000;
+  white-space: pre-line;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  max-width: 250px;
 
-    &.visible {
-      opacity: 1;
-    }
+  &.visible {
+    opacity: 1;
   }
 }
