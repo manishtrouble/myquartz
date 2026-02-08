@@ -4,8 +4,6 @@ title: Hello, world!
 
 I'm Manish. I'm too broke for *real* estate, so here's my little acre of... *digital garden*.
 
-This site uses the [Zettelkasten](https://en.wikipedia.org/wiki/Zettelkasten) method — ideas start as **seedlings** 🌱, grow into **budding** notes 🌿, and eventually mature into **evergreen** posts 🌲. You'll find notes in various stages of growth here, and that's intentional.
-
 I love Math, Music, and Cinema. I am a full-time Data Scientist at [Aganitha](https://aganitha.ai), an occasional quizzer, and a compulsive punner (or *pun*star... or *pun*dit?).
 
 I ask weird questions like [where is "Old Zealand"?](https://www.britannica.com/story/where-is-old-zealand)

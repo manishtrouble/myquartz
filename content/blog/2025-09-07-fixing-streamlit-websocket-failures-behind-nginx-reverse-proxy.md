@@ -33,7 +33,17 @@ WebSocket error: wss://example.com/streamlitApp/_stcore/stream failed
 
 ## The Setup
 
-I had my container running on a child node behind an Nginx reverse proxy on a master node. To expose the app publicly, I added a standard proxy rule based on existing configurations:
+I had my container running on a child node behind an Nginx reverse proxy on a master node as shown below:
+```mermaid
+graph LR
+    User((User Browser)) -- "HTTPS (Port 443)" --> Master["Master Node (Nginx)"]
+    subgraph "Internal Network"
+    Master -- "Proxy Pass (Port 8501)" --> Child["Child Node (Docker Container)"]
+    Child -- "Runs" --> Streamlit["Streamlit App"]
+    end
+```
+
+To expose the app publicly, I added a standard proxy rule based on existing configurations:
 
 ```nginx
 location /streamlitApp/ {
@@ -65,6 +75,20 @@ What made it more confusing: the same app worked perfectly on my personal server
 
 ## Understanding the Root Cause
 
+```mermaid
+sequenceDiagram
+    participant B as Browser
+    participant N as Nginx (Master)
+    participant S as Streamlit (Child)
+
+    B->>N: GET /streamlitApp/ (Upgrade: websocket)
+    Note over N: Standard config: <br/>Strips 'Upgrade' & 'Connection' headers
+    N->>S: GET /_stcore/stream (Standard HTTP)
+    Note over S: "Where is the WebSocket?"
+    S-->>N: 403 Forbidden / Connection Close
+    N-->>B: WebSocket Error: Connection Failed
+```
+
 ### Why React Works But Streamlit Doesn't
 
 The fundamental difference lies in their architectures:
@@ -93,11 +117,22 @@ The multi-node setup created an origin mismatch:
 - Streamlit runs on: `childNode:8501`
 - With CORS enforcement enabled (default), Streamlit blocks cross-origin WebSocket connections
 
-### Why My Setup Worked
+## The Solution
 
-Traefik has built-in WebSocket support and automatically handles upgrade headers. Also, running on the same server eliminated CORS issues entirely.
+```mermaid
+sequenceDiagram
+    participant B as Browser
+    participant N as Nginx (Master)
+    participant S as Streamlit (Child)
 
-## ✨The Solution✨
+    Note over B,S: Fixed Config: proxy_set_header Upgrade $http_upgrade
+    B->>N: GET /_stcore/stream (Upgrade: websocket)
+    N->>S: GET /_stcore/stream (Upgrade: websocket)
+    Note over S: --server.enableCORS=false
+    S-->>N: 101 Switching Protocols
+    N-->>B: 101 Switching Protocols
+    Note over B,S: 🟢 WebSocket Tunnel Established 🟢
+```
 
 Two changes were needed:
 
