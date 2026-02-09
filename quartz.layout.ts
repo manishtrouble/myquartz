@@ -117,7 +117,50 @@ export const defaultListPageLayout: PageLayout = {
         { Component: Component.Darkmode() },
       ],
     }),
-    Component.Explorer(),
+    Component.DesktopOnly(
+      Component.RecentNotes({
+        title: "Recent Writing",
+        limit: 3,
+        showTags: false,
+        linkToMore: "tags/evergreen" as SimpleSlug,
+        filter: (f) => f.frontmatter?.tags?.includes("evergreen") ?? false,
+      }),
+    ),
+    Component.DesktopOnly(
+      Component.RecentNotes({
+        title: "Recent Notes",
+        limit: 3,
+        showTags: false,
+        linkToMore: "tags/seedling" as SimpleSlug,
+        filter: (f) => {
+          const tags = f.frontmatter?.tags ?? []
+          return tags.includes("seedling") || tags.includes("budding")
+        },
+      }),
+    ),
   ],
-  right: [],
+  right: [
+    // Mobile-only: Recent Writing and Notes
+    Component.MobileOnly(
+      Component.RecentNotes({
+        title: "Recent Writing",
+        limit: 3,
+        showTags: false,
+        linkToMore: "tags/evergreen" as SimpleSlug,
+        filter: (f) => f.frontmatter?.tags?.includes("evergreen") ?? false,
+      }),
+    ),
+    Component.MobileOnly(
+      Component.RecentNotes({
+        title: "Recent Notes",
+        limit: 3,
+        showTags: false,
+        linkToMore: "tags/seedling" as SimpleSlug,
+        filter: (f) => {
+          const tags = f.frontmatter?.tags ?? []
+          return tags.includes("seedling") || tags.includes("budding")
+        },
+      }),
+    ),
+  ],
 }

@@ -1,15 +1,15 @@
 ---
 title: "Why My Streamlit App Won't Load: Nginx WebSocket Configuration"
 created:
-  - 2026-02-07 23:30
+  - 2025-09-07 23:30
 tags:
-  - "#evergreen"
-  - "#streamlit"
+  - evergreen
+  - streamlit
   - nginx
   - websocket
 by: Manish
 ---
-**TL;DR**: Streamlit apps use WebSockets for real-time communication. When deploying behind an Nginx reverse proxy, you need to add three lines to handle WebSocket upgrades and disable CORS enforcement in Streamlit.
+> **TL;DR**: Streamlit apps use WebSockets for real-time communication. When deploying behind an Nginx reverse proxy, you need to add three lines to handle WebSocket upgrades and disable CORS enforcement in Streamlit.
 
 **The fix:**
 ```nginx
