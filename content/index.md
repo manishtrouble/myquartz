@@ -14,6 +14,5 @@ Currently, I'm building AI solutions to accelerate drug discovery, maintaining b
 
 **You might be interested in my:**
 - [[blog/index|Blog]] — where I write
-- [[projects/index|Projects]] — where I experiment  
 - [[life/index|Life]] — where I document my life in weeks
 - [Resume](/assets/resume.pdf) — please check it out :)
