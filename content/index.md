@@ -15,4 +15,4 @@ Currently, I'm building AI solutions to accelerate drug discovery, maintaining b
 ## Explore
 - [[blog/index|Blog]] - My writings 
 - [[life/index|Life]] - My life in weeks
-- [Resume](/assets/resume.pdf) - Please check it out :)
+- [Resume](./assets/resume.pdf) - Please check it out :)
